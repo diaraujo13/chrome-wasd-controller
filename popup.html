@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 300px;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin: 0 0 8px 0;
+    }
+    
+    .subtitle {
+      font-size: 12px;
+      color: #666;
+      margin: 0;
+    }
+    
+    .controls {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 16px;
+    }
+    
+    .toggle-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .toggle-label {
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .toggle-switch {
+      position: relative;
+      width: 50px;
+      height: 24px;
+      background: #ccc;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .toggle-switch.active {
+      background: #4CAF50;
+    }
+    
+    .toggle-slider {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+    
+    .toggle-switch.active .toggle-slider {
+      transform: translateX(26px);
+    }
+    
+    .status {
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+      padding: 8px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    
+    .status.enabled {
+      background: #e8f5e8;
+      color: #2e7d32;
+    }
+    
+    .status.disabled {
+      background: #ffebee;
+      color: #c62828;
+    }
+    
+    .key-map {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .key-map-title {
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: #333;
+    }
+    
+    .key-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    
+    .key-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .key {
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+      font-weight: bold;
+      min-width: 20px;
+      text-align: center;
+    }
+    
+    .action {
+      color: #555;
+    }
+    
+    .shortcut-info {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 12px;
+      font-size: 11px;
+      color: #856404;
+    }
+
+    .footer {
+        font-size: 12px;
+        color: #666;
+        text-align: center;
+        padding: 8px;
+        border-top: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="title">WASD Scroll Controller</div>
+    <div class="subtitle">Control page scrolling with keyboard</div>
+  </div>
+  
+  <div class="controls">
+    <div class="toggle-section">
+      <span class="toggle-label">Enable Extension</span>
+      <div class="toggle-switch" id="toggleSwitch">
+        <div class="toggle-slider"></div>
+      </div>
+    </div>
+    
+    <div class="status" id="status">Loading...</div>
+  </div>
+  
+  <div class="key-map">
+    <div class="key-map-title">Key Controls</div>
+    <div class="key-item">
+      <span class="key">W</span>
+      <span class="action">Scroll Up</span>
+    </div>
+    <div class="key-item">
+      <span class="key">S</span>
+      <span class="action">Scroll Down</span>
+    </div>
+    <div class="key-item">
+      <span class="key">A</span>
+      <span class="action">Page Up</span>
+    </div>
+    <div class="key-item">
+      <span class="key">D</span>
+      <span class="action">Page Down</span>
+    </div>
+    <div class="key-item">
+      <span class="key">Q</span>
+      <span class="action">Go to Top</span>
+    </div>
+    <div class="key-item">
+      <span class="key">E</span>
+      <span class="action">Go to Bottom</span>
+    </div>
+    
+    <div class="shortcut-info">
+      <strong>Quick Toggle:</strong> Ctrl + Shift + W to enable/disable on any page
+    </div>
+  </div>
+
+  <div class="footer">
+    Credits: <a href="https://www.linkedin.com/in/diaraujo13/" target="_blank" rel="noopener noreferrer">Izaías Araújo</a> | <a href="https://github.com/diaraujo13/chrome-wasd-controller" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
