@@ -82,6 +82,58 @@
     return false;
   }
   
+  // Teleprompter overlay logic
+  let isXHeld = false;
+  let overlay = null;
+  let mouseY = window.innerHeight / 2;
+
+  function showTeleprompterOverlay() {
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'wasd-teleprompter-overlay';
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100vw';
+      overlay.style.height = '100vh';
+      overlay.style.pointerEvents = 'none';
+      overlay.style.zIndex = '999999';
+      document.body.appendChild(overlay);
+    }
+    overlay.style.display = 'block';
+    updateTeleprompterOverlay();
+  }
+
+  function hideTeleprompterOverlay() {
+    if (overlay) overlay.style.display = 'none';
+  }
+
+  function updateTeleprompterOverlay() {
+    if (!overlay) return;
+    // 100px window centered at mouseY
+    const windowHeight = 100;
+    const top = Math.max(0, mouseY - windowHeight / 2);
+    const bottom = Math.min(window.innerHeight, mouseY + windowHeight / 2);
+    overlay.style.background = `linear-gradient(to bottom, rgba(0,0,0,0.7) ${top}px, rgba(0,0,0,0) ${top}px, rgba(0,0,0,0) ${bottom}px, rgba(0,0,0,0.7) ${bottom}px)`;
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key.toLowerCase() === 'x' && !isXHeld) {
+      isXHeld = true;
+      showTeleprompterOverlay();
+    }
+  });
+  document.addEventListener('keyup', function(e) {
+    if (e.key.toLowerCase() === 'x') {
+      isXHeld = false;
+      hideTeleprompterOverlay();
+    }
+  });
+  document.addEventListener('mousemove', function(e) {
+    mouseY = e.clientY;
+    if (isXHeld) updateTeleprompterOverlay();
+  });
+  
   // Keyboard event listeners
   document.addEventListener('keydown', function(e) {
     // Don't interfere if user is typing in input fields
@@ -92,6 +144,17 @@
     
     const key = e.key.toLowerCase();
     const validKeys = ['w', 'a', 's', 'd', 'q', 'e'];
+    
+    // Highlight paragraphs above/below on X (persistent)
+    if (key === 'x' && lastHoveredParagraph) {
+      highlightAdjacentParagraphs(lastHoveredParagraph);
+      return;
+    }
+    // Clear highlight on Esc
+    if (key === 'escape') {
+      clearHighlights();
+      return;
+    }
     
     if (validKeys.includes(key)) {
       // Prevent default behavior for these keys
