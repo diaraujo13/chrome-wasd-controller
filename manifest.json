@@ -1,0 +1,26 @@
+{ 
+  "manifest_version": 3,
+  "name": "WASD Scroll Controller",
+  "version": "1.0",
+  "description": "Control page scrolling with WASD keys - W/S for up/down, A/D for page up/down, Q for home, E for end",
+  "author": "Izaías Araújo ",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "WASD Scroll Controller"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
