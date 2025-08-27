@@ -145,16 +145,6 @@
     const key = e.key.toLowerCase();
     const validKeys = ['w', 'a', 's', 'd', 'q', 'e'];
     
-    // Highlight paragraphs above/below on X (persistent)
-    if (key === 'x' && lastHoveredParagraph) {
-      highlightAdjacentParagraphs(lastHoveredParagraph);
-      return;
-    }
-    // Clear highlight on Esc
-    if (key === 'escape') {
-      clearHighlights();
-      return;
-    }
     
     if (validKeys.includes(key)) {
       // Prevent default behavior for these keys
@@ -209,14 +199,6 @@
     return indicator;
   }
   
-  // Show indicator briefly when page loads
-  const indicator = createIndicator();
-  setTimeout(() => {
-    indicator.style.opacity = '1';
-    setTimeout(() => {
-      indicator.style.opacity = '0';
-    }, 2000);
-  }, 500);
   
   // Update indicator based on enabled state
   function updateIndicator() {
